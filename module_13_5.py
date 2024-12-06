@@ -13,8 +13,8 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 kb = ReplyKeyboardMarkup(resize_keyboard=True)
 button = KeyboardButton(text='Информация')
 button2 = KeyboardButton(text='Рассчитать')
-kb.add(button)
-kb.add(button2)
+kb.add(button, button2)
+
 
 
 class UserState(StatesGroup):
@@ -60,6 +60,11 @@ async def send_calories(message, state):
 
     await message.answer(f'Ваша норма калорий: {colories:.0f}, ккал в день')
     await state.finish()
+
+
+@dp.message_handler()
+async def message(message):
+    await message.answer('Введите команду /start, чтобы начать общение.')
 
 
 
